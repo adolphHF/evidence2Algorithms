@@ -35,7 +35,7 @@ def optimal_wiring(graph):
 
 
 # BFS to find an augmenting path for EK
-def bfs(residual, source, sink, parent): #capacity param removed since i think is not necessary, but maybe change the order of them so match with the function
+def bfs(residual, source, sink, parent):
     visited = [False] * len(residual)
     queue = deque([source])
     visited[source] = True
