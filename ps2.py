@@ -1,6 +1,11 @@
+"""
+@description: Integrative activity 2, finding optimal route and maximum possible flow
+@authors: Aracelli Melissa Boza Zabarburú A01662934, Adolfo Hernández Fernández A01664412, Luis Enrique Salazar Pérez A00833460
+@date: 2024/07/10 
+"""
+
 import heapq
 from collections import deque
-
 
 # Dijkstra's to find shortest paths in a graph
 def dijkstra(graph, start):
@@ -21,18 +26,16 @@ def dijkstra(graph, start):
                     parents[neighbor] = current_node
                     heapq.heappush(priority_queue, (distance, neighbor))
 
-    return distances, parents
-
+    return parents
 
 # Dijkstra
 def optimal_wiring(graph):
-    _, parents = dijkstra(graph, 0)
+    parents = dijkstra(graph, 0)
     wiring = []
     for i in range(1, len(parents)):
         if parents[i] != -1:
             wiring.append((parents[i], i))
     return wiring
-
 
 # BFS to find an augmenting path for EK
 def bfs(residual, source, sink, parent):
@@ -50,7 +53,6 @@ def bfs(residual, source, sink, parent):
                 queue.append(neighbor)
                 visited[neighbor] = True
     return False
-
 
 # Edmonds-Karp Algorithm for Maximum Flow
 def edmonds_karp(capacity, source, sink):
@@ -79,14 +81,13 @@ def edmonds_karp(capacity, source, sink):
 
     return max_flow
 
-
 def main():
 
     input_file = input("Enter the input file name: ")
     with open(input_file, 'r') as file:
-        n = int(file.readline().strip())  
-        distance_matrix = [list(map(int, file.readline().strip().split())) for _ in range(n)]
-        capacity_matrix = [list(map(int, file.readline().strip().split())) for _ in range(n)]
+        n = int(file.readline().strip()) # obtain the number of neighborhoods in the city.  
+        distance_matrix = [list(map(int, file.readline().strip().split())) for _ in range(n)] #square matrix representing the network with the distances in kilometers between the neighborhoods in the city
+        capacity_matrix = [list(map(int, file.readline().strip().split())) for _ in range(n)] #square matrix representing the maximum data flow capacities between neighborhood i and neighborhood j 
 
     # Dijkstra
     wiring = optimal_wiring(distance_matrix)
