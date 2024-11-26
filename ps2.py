@@ -1,7 +1,7 @@
 """
 @description: Integrative activity 2, finding optimal route and maximum possible flow
 @authors: Aracelli Melissa Boza Zabarburú A01662934, Adolfo Hernández Fernández A01664412, Luis Enrique Salazar Pérez A00833460
-@date: 2024/25/11 
+@date: 2024/25/11
 """
 
 import heapq
